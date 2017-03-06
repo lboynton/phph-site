@@ -199,4 +199,13 @@ use Ramsey\Uuid\Uuid;
     {
         return $this->attendees->count();
     }
+
+    public function checkIn(User $user) : void
+    {
+        Assertion::true($user->isAttending($this), 'Cannot check in user who is not attending the meetup');
+    }
+
+    public function cancelCheckIn(User $user) : void
+    {
+    }
 }

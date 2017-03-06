@@ -59,6 +59,9 @@ use Ramsey\Uuid\Uuid;
      */
     private $meetupsAttended;
 
+    // TODO: Should this be a separate ManyToMany? Or should there be an intermediate oneToMany entity?
+    private $meetupsCheckedInTo;
+
     /**
      * @ORM\OneToMany(targetEntity=UserThirdPartyAuthentication::class, mappedBy="user", cascade={"persist"})
      * @var ArrayCollection|UserThirdPartyAuthentication[]
@@ -126,6 +129,11 @@ use Ramsey\Uuid\Uuid;
     public function isAttending(Meetup $meetup) : bool
     {
         return $this->meetupsAttended->contains($meetup);
+    }
+
+    public function isCheckedIn(Meetup $meetup) : bool
+    {
+        return false;
     }
 
     public function meetupsAttended() : Collection

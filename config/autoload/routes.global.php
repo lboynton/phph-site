@@ -26,6 +26,7 @@ return [
             App\Action\Account\Meetup\EditMeetupAction::class => App\Action\Account\Meetup\EditMeetupActionFactory::class,
             App\Action\Account\Meetup\ViewMeetupAction::class => App\Action\Account\Meetup\ViewMeetupActionFactory::class,
             App\Action\Account\Meetup\ToggleAttendanceAction::class => App\Action\Account\Meetup\ToggleAttendanceActionFactory::class,
+            App\Action\Account\Meetup\ToggleCheckInAction::class => App\Action\Account\Meetup\ToggleCheckInActionFactory::class,
             App\Action\Account\Meetup\ListMeetupsAction::class => App\Action\Account\Meetup\ListMeetupsActionFactory::class,
             App\Action\Account\Location\ListLocationsAction::class => App\Action\Account\Location\ListLocationsActionFactory::class,
             App\Action\Account\Location\AddLocationAction::class => App\Action\Account\Location\AddLocationActionFactory::class,
@@ -183,6 +184,16 @@ return [
                 App\Action\Account\Meetup\ToggleAttendanceAction::class,
             ],
             'allowed_methods' => ['POST'],
+        ],
+        [
+            'name' => 'account-meetup-toggle-check-in',
+            'path' => '/account/meetup/{uuid}/toggle-check-in',
+            'middleware' => [
+                App\Middleware\Authentication::class,
+                App\Service\Authorization\Middleware\HasAttendeeRoleMiddleware::class,
+                App\Action\Account\Meetup\ToggleCheckInAction::class,
+            ],
+            'allowed_methods' => ['POST', 'GET'],
         ],
         [
             'name' => 'account-locations-list',
